@@ -7,9 +7,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="@dimen/actionBarElevation"
     android:background="@color/colorPrimary"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    android:theme="@style/ThemeOverlay.AppCompat.Light"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:titleTextColor="@color/colorWithe"
+    app:layout_scrollFlags="scroll|enterAlways"
     >
 </androidx.appcompat.widget.Toolbar>
 

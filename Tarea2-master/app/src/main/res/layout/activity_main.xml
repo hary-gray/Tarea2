@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/myActionBar"
+        layout="@layout/actionbar"
+        >
+    </include>
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TituloMainAct"
+        android:textSize="@dimen/titulo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/button"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMascotas1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

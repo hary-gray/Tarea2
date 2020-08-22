@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ListaDeMascotas</string>
+    <string name="TituloMainAct">Lista De Mascotas</string>
+    <string name="Nombre">Damita</string>
+    <string name="TopRating">Top Raitting</string>
+</resources>

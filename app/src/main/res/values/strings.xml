@@ -3,4 +3,8 @@
     <string name="TituloMainAct">Lista De Mascotas</string>
     <string name="Nombre">Damita</string>
     <string name="TopRating">Top Raitting</string>
+    <string name="Acerca">Acerca</string>
+    <string name="contacto">Contacto</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

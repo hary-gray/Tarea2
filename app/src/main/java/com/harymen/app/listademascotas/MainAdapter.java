@@ -2,6 +2,8 @@ package com.harymen.app.listademascotas;
 
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import java.util.zip.Inflater;
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MascotaViewHolder> {
     ArrayList<Mascota> mascotas;
     //Activity activity;
+
     public MainAdapter(ArrayList<Mascota> mascotas /*,Activity activity*/) {
         this.mascotas = mascotas;
         //this.activity = activity;
@@ -39,6 +42,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MascotaViewHol
                 Mascota mascota=mascotas.get(position);
                 mascota.setLikes(mascota.getLikes()+1);
                 holder.tvLikes.setText(mascota.getLikes()+"");
+
             }
         });
     }
@@ -71,4 +75,5 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MascotaViewHol
            tvLikes.setText(mascota.getLikes()+"");
         }
     }
+
 }

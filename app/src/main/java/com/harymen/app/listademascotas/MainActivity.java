@@ -3,44 +3,62 @@ package com.harymen.app.listademascotas;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList <Mascota> mascotas;
-    private RecyclerView rvMascotas1;
-    TextView tvTitulo;
-    Mascota top1;
-    Mascota top2;
-    Mascota top3;
-    Mascota top4;
-    Mascota top5;
+    private Toolbar toolbar;
+    private TabLayout tablayout;
+    private ViewPager viewpager;
+    ArrayList<Mascota> mascotas;
+    public Mascota top1;
+    public Mascota top2;
+    public Mascota top3;
+    public Mascota top4;
+    public Mascota top5;
+    Bundle args;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tvTitulo=(TextView) findViewById(R.id.tvTitulo);
-        Toolbar myActionBar = (Toolbar) findViewById(R.id.myActionBar);
-        setSupportActionBar(myActionBar);
-        rvMascotas1=(RecyclerView) findViewById(R.id.rvMascotas1);
-        LinearLayoutManager llm=new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        rvMascotas1.setLayoutManager(llm);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tablayout =(TabLayout)  findViewById(R.id.tablayout);
+        viewpager =(ViewPager) findViewById(R.id.viewpager);
         inicializarListaMascotas();
-        inicializarAdaptador();
-
-
+        iniciarViewPagerAdapter();
+        if (toolbar !=null){
+            setSupportActionBar(toolbar);
+        }
     }
-
-    @Override
+    private ArrayList<Fragment> agregarFragments(){
+        ArrayList<Fragment> fragments=new ArrayList<>();
+        fragments.add(new Listado());
+        fragments.add(new Perfil());
+        fragments.get(0).setArguments(args);
+        return fragments;
+    }
+    private void iniciarViewPagerAdapter(){
+        viewpager.setAdapter(new ViepagerAdapter(getSupportFragmentManager(),agregarFragments()));
+        tablayout.setupWithViewPager(viewpager);
+        tablayout.getTabAt(0).setIcon(R.drawable.huesoblancoo);
+        tablayout.getTabAt(1).setIcon(R.drawable.huesoamarilloo);
+    }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_opciones, menu);
         return true;
@@ -50,35 +68,36 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_view:
-                buscarTop();
+                buscarTop(mascotas);
                 Intent intent= new Intent(this,RaitingMascotas.class);
                 intent.putExtra("Nombre1",top1.getNombre());
-                intent.putExtra("Likes1",top1.getLikes());
+                intent.putExtra("Likes1",6);
                 intent.putExtra("Foto1",top1.getFoto());
                 intent.putExtra("Nombre2",top2.getNombre());
-                intent.putExtra("Likes2",top2.getLikes());
+                intent.putExtra("Likes2",4);
                 intent.putExtra("Foto2",top2.getFoto());
                 intent.putExtra("Nombre3",top3.getNombre());
-                intent.putExtra("Likes3",top3.getLikes());
+                intent.putExtra("Likes3",4);
                 intent.putExtra("Foto3",top3.getFoto());
                 intent.putExtra("Nombre4",top4.getNombre());
-                intent.putExtra("Likes4",top4.getLikes());
+                intent.putExtra("Likes4",3);
                 intent.putExtra("Foto4",top4.getFoto());
                 intent.putExtra("Nombre5",top5.getNombre());
-                intent.putExtra("Likes5",top5.getLikes());
+                intent.putExtra("Likes5",2);
                 intent.putExtra("Foto5",top5.getFoto());
                 //tvTitulo.setText(top1.getNombre() + " " + top2.getNombre());
                 startActivity(intent);
 
                 break;
+            case R.id.contacto:
+                Intent intent1 = new Intent(MainActivity.this,MensajeContacto.class);
+                startActivity(intent1);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void inicializarAdaptador(){
-        MainAdapter adapter = new MainAdapter(mascotas/*,this*/);
-        rvMascotas1.setAdapter(adapter);
-    }
+
     private void inicializarListaMascotas() {
         mascotas = new ArrayList<Mascota>();
         mascotas.add(new Mascota("Damita", R.drawable.damita, 0));
@@ -97,8 +116,15 @@ public class MainActivity extends AppCompatActivity {
         mascotas.add(new Mascota("Ralph", R.drawable.ralphh, 0));
         mascotas.add(new Mascota("Bolt", R.drawable.boltt, 0));
         //mascotas.add(new Mascota("hueso", R.drawable.huesoamarilloo, 0));
+         args = new Bundle();
+        for (int i = 0; i<mascotas.size();i++){
+            args.putInt("image"+i,mascotas.get(i).getFoto());
+            args.putString("nombre"+i,mascotas.get(i).getNombre());
+            args.putInt("likes"+i,mascotas.get(i).getLikes());
+        }
+        args.putInt("size",mascotas.size());
     }
-    private void buscarTop(){
+    public void buscarTop(ArrayList<Mascota> mascotas){
         int m=mascotas.size();
         int ind1=-1; int ind2=-1; int ind3=-1; int ind4=-1; int ind5=-1;
 
