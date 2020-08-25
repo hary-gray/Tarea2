@@ -1,9 +1,7 @@
-package com.harymen.app.listademascotas;
+package com.harymen.app.listademascotas.Adapatadores;
 
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.harymen.app.listademascotas.POJO.Mascota;
+import com.harymen.app.listademascotas.R;
+import com.harymen.app.listademascotas.db.ConstructoMascotas;
+
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MascotaViewHolder> {
     ArrayList<Mascota> mascotas;
-    //Activity activity;
+    Activity activity;
 
-    public MainAdapter(ArrayList<Mascota> mascotas /*,Activity activity*/) {
+    public MainAdapter(ArrayList<Mascota> mascotas ,Activity activity) {
         this.mascotas = mascotas;
-        //this.activity = activity;
+        this.activity = activity;
     }
 
     @NonNull
@@ -40,8 +41,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MascotaViewHol
             @Override
             public void onClick(View view) {
                 Mascota mascota=mascotas.get(position);
-                mascota.setLikes(mascota.getLikes()+1);
-                holder.tvLikes.setText(mascota.getLikes()+"");
+                //mascota.setLikes(mascota.getLikes()+1);
+                ConstructoMascotas constructoMascotas= new ConstructoMascotas(activity);
+                constructoMascotas.darLikeMascota(mascota);
+
+                holder.tvLikes.setText(constructoMascotas.obtenerLikesMascota(mascota)+"");
 
             }
         });

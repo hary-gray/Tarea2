@@ -1,6 +1,5 @@
-package com.harymen.app.listademascotas;
+package com.harymen.app.listademascotas.Fragments;
 
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.imageview.ShapeableImageView;
+import com.harymen.app.listademascotas.Adapatadores.AdapterPerfil;
+import com.harymen.app.listademascotas.POJO.Fotos;
+import com.harymen.app.listademascotas.R;
 
 import java.util.ArrayList;
 

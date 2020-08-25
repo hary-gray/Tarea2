@@ -1,23 +1,20 @@
-package com.harymen.app.listademascotas;
+package com.harymen.app.listademascotas.Fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.harymen.app.listademascotas.Adapatadores.MainAdapter;
+import com.harymen.app.listademascotas.POJO.Mascota;
+import com.harymen.app.listademascotas.Presentadores.IListadoPresenter;
+import com.harymen.app.listademascotas.Presentadores.ListadoPresenter;
+import com.harymen.app.listademascotas.R;
 
 import java.util.ArrayList;
 
@@ -26,9 +23,9 @@ import java.util.ArrayList;
  * Use the {@link Listado#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Listado extends Fragment {
+public class Listado extends Fragment implements IListado {
     RecyclerView rvMascotas1;
-    public ArrayList<Mascota> mascotas;
+    private IListadoPresenter presenter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -54,18 +51,9 @@ public class Listado extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mascotas = new ArrayList<Mascota>();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
-            int size = getArguments().getInt("size");
-            for(int i=0;i<size;i++){
-                int image = getArguments().getInt("image"+i);
-                String nombre = getArguments().getString("nombre"+i);
-                int likes = getArguments().getInt("likes"+i);
-                mascotas.add(new Mascota(nombre,image,likes));
-            }
         }
     }
 
@@ -75,14 +63,25 @@ public class Listado extends Fragment {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_listado, container, false);
         rvMascotas1 =(RecyclerView) v.findViewById(R.id.rvMascotas1);
+        presenter =new ListadoPresenter(this,getContext());
+        return v;
+    }
+
+    @Override
+    public void generarLinearLayoutVertical() {
         LinearLayoutManager llm=new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvMascotas1.setLayoutManager(llm);
-        inicializarAdaptador();
-        return v;
     }
-    private void inicializarAdaptador(){
-        MainAdapter adapter = new MainAdapter(mascotas/*,this*/);
+
+    @Override
+    public MainAdapter crearAdaptador(ArrayList<Mascota> mascotas) {
+        MainAdapter adapter = new MainAdapter(mascotas,getActivity());
+        return adapter;
+    }
+
+    @Override
+    public void inicializarAdaptadorListaMascotas(MainAdapter adapter) {
         rvMascotas1.setAdapter(adapter);
     }
 }

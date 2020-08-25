@@ -1,4 +1,4 @@
-package com.harymen.app.listademascotas;
+package com.harymen.app.listademascotas.POJO;
 
 public class Fotos {
     private int image;

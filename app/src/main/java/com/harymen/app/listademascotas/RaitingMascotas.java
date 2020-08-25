@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.harymen.app.listademascotas.Adapatadores.MainAdapter;
+import com.harymen.app.listademascotas.POJO.Mascota;
+
 import java.util.ArrayList;
 
 public class RaitingMascotas extends AppCompatActivity {
@@ -49,7 +52,7 @@ public class RaitingMascotas extends AppCompatActivity {
         inicilizar_adaptador();
     }
     private  void inicilizar_adaptador(){
-    MainAdapter adapter = new MainAdapter(top_mascotas);
+    MainAdapter adapter = new MainAdapter(top_mascotas,this);
     rvRaiting.setAdapter(adapter);
     }
 }

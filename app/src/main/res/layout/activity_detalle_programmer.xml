@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetalleProgrammer"
+    android:orientation="vertical">
+    <include android:id="@+id/toolbarDetalle"
+        layout="@layout/actionbar"/>
+    <ImageView
+        android:id="@+id/ivHueso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/huesoamarilloo"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/tvTituloDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hary Gray Programmer"
+        android:textSize="@dimen/text25"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/button"/>
+
+    <TextView
+        android:id="@+id/tvDescriptionDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text25"
+        android:text="Soy nuevo en Android pero tengo muchas ganas de aprender y sacarle el maximo provecho a este curso."
+        android:gravity="center"/>
+
+</LinearLayout>
